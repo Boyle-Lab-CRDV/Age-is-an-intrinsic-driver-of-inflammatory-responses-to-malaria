@@ -20,8 +20,8 @@ jobs:
       - name: Copy subfolders to deploy root
         run: |
           mkdir public
-          cp -r code/monocytes/ public/Monocytes analysis/
-          cp -r code/Vd2/ public/Vd2 analysis/
+          cp -r code/monocytes/ public/monocytes/
+          cp -r code/Vd2/ public/Vd2/
           cp -r code/index.html public/index.html
 
 
