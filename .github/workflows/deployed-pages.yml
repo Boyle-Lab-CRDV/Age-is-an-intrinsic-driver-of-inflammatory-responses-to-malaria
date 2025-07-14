@@ -1,0 +1,33 @@
+
+name: Deploy Rmd Pages
+
+on:
+  push:
+    branches:
+      - main  # or your working branch
+
+permissions:
+  contents: write  # 👈 THIS is crucial for pushing to gh-pages
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy subfolders to deploy root
+        run: |
+          mkdir public
+          cp -r code/monocytes/ public/Monocytes analysis/
+          cp -r code/Vd2/ public/Vd2 analysis/
+          cp -r code/index.html public/index.html
+
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages          # target deployment branch
+          folder: public            # this is the folder we created
+          clean: true               # wipes previous content to avoid leftovers
